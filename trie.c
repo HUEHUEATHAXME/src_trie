@@ -181,10 +181,11 @@ int trie_insert(trie_t *trie, void *key, void *value)
 
     trie->root = _trie_insert(trie, trie->root, new, 0);
 
-    // one memory leak: if insert fails we should free 'new'
-
     return 0;
  error:
+    if (new != NULL)    {
+        free(new);
+    }
     return -1;
 }
 
